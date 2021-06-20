@@ -30,6 +30,7 @@ class VaultSettingsJsonAdapter {
 		out.name("usesReadOnlyMode").value(value.usesReadOnlyMode().get());
 		out.name("mountFlags").value(value.mountFlags().get());
 		out.name("filenameLengthLimit").value(value.filenameLengthLimit().get());
+		out.name("noShortNameEncryption").value(value.noShortNameEncryption().get());
 		out.name("actionAfterUnlock").value(value.actionAfterUnlock().get().name());
 		out.endObject();
 	}
@@ -47,6 +48,7 @@ class VaultSettingsJsonAdapter {
 		boolean usesReadOnlyMode = VaultSettings.DEFAULT_USES_READONLY_MODE;
 		String mountFlags = VaultSettings.DEFAULT_MOUNT_FLAGS;
 		int filenameLengthLimit = VaultSettings.DEFAULT_FILENAME_LENGTH_LIMIT;
+		boolean noShortNameEncryption = VaultSettings.DEFAULT_NO_SHORT_NAME_ENCRYPTION;
 		WhenUnlocked actionAfterUnlock = VaultSettings.DEFAULT_ACTION_AFTER_UNLOCK;
 
 		in.beginObject();
@@ -65,6 +67,7 @@ class VaultSettingsJsonAdapter {
 				case "usesReadOnlyMode" -> usesReadOnlyMode = in.nextBoolean();
 				case "mountFlags" -> mountFlags = in.nextString();
 				case "filenameLengthLimit" -> filenameLengthLimit = in.nextInt();
+				case "noShortNameEncryption" -> noShortNameEncryption = in.nextBoolean();
 				case "actionAfterUnlock" -> actionAfterUnlock = parseActionAfterUnlock(in.nextString());
 				default -> {
 					LOG.warn("Unsupported vault setting found in JSON: " + name);
@@ -89,6 +92,7 @@ class VaultSettingsJsonAdapter {
 		vaultSettings.usesReadOnlyMode().set(usesReadOnlyMode);
 		vaultSettings.mountFlags().set(mountFlags);
 		vaultSettings.filenameLengthLimit().set(filenameLengthLimit);
+		vaultSettings.noShortNameEncryption().set(noShortNameEncryption);
 		vaultSettings.actionAfterUnlock().set(actionAfterUnlock);
 		return vaultSettings;
 	}

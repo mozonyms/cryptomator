@@ -8,6 +8,7 @@ package org.cryptomator.common.settings;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Strings;
 import com.google.common.io.BaseEncoding;
+import org.cryptomator.common.vaults.VaultState;
 
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -36,6 +37,7 @@ public class VaultSettings {
 	public static final boolean DEFAULT_REAVEAL_AFTER_MOUNT = true;
 	public static final boolean DEFAULT_USES_INDIVIDUAL_MOUNTPATH = false;
 	public static final boolean DEFAULT_USES_READONLY_MODE = false;
+	public static final boolean DEFAULT_NO_SHORT_NAME_ENCRYPTION = false;
 	public static final String DEFAULT_MOUNT_FLAGS = "";
 	public static final int DEFAULT_FILENAME_LENGTH_LIMIT = -1;
 	public static final WhenUnlocked DEFAULT_ACTION_AFTER_UNLOCK = WhenUnlocked.ASK;
@@ -53,6 +55,7 @@ public class VaultSettings {
 	private final BooleanProperty usesReadOnlyMode = new SimpleBooleanProperty(DEFAULT_USES_READONLY_MODE);
 	private final StringProperty mountFlags = new SimpleStringProperty(DEFAULT_MOUNT_FLAGS);
 	private final IntegerProperty filenameLengthLimit = new SimpleIntegerProperty(DEFAULT_FILENAME_LENGTH_LIMIT);
+	private final BooleanProperty noShortNameEncryption = new SimpleBooleanProperty(DEFAULT_NO_SHORT_NAME_ENCRYPTION);
 	private final ObjectProperty<WhenUnlocked> actionAfterUnlock = new SimpleObjectProperty<>(DEFAULT_ACTION_AFTER_UNLOCK);
 
 	private final StringBinding mountName;
@@ -63,7 +66,7 @@ public class VaultSettings {
 	}
 
 	Observable[] observables() {
-		return new Observable[]{path, displayName, winDriveLetter, unlockAfterStartup, revealAfterMount, useCustomMountPath, customMountPath, usesReadOnlyMode, mountFlags, filenameLengthLimit, actionAfterUnlock};
+		return new Observable[]{path, displayName, winDriveLetter, unlockAfterStartup, revealAfterMount, useCustomMountPath, customMountPath, usesReadOnlyMode, mountFlags, filenameLengthLimit, noShortNameEncryption, actionAfterUnlock};
 	}
 
 	public static VaultSettings withRandomId() {
@@ -147,6 +150,8 @@ public class VaultSettings {
 	public BooleanProperty usesReadOnlyMode() {
 		return usesReadOnlyMode;
 	}
+
+	public BooleanProperty noShortNameEncryption() { return noShortNameEncryption; }
 
 	public StringProperty mountFlags() {
 		return mountFlags;

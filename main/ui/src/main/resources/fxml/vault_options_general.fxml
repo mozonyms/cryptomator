@@ -21,6 +21,7 @@
 		</HBox>
 
 		<CheckBox text="%vaultOptions.general.unlockAfterStartup" fx:id="unlockOnStartupCheckbox"/>
+		<CheckBox text="%vaultOptions.general.noShortNameEncryption" fx:id="noShortNameEncryptionCheckbox"/>
 
 		<HBox spacing="6" alignment="CENTER_LEFT">
 			<Label text="%vaultOptions.general.actionAfterUnlock"/>

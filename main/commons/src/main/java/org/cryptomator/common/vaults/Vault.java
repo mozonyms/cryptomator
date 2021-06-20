@@ -126,6 +126,7 @@ public class Vault {
 				.withMasterkeyFilename(MASTERKEY_FILENAME) //
 				.withMaxPathLength(vaultSettings.filenameLengthLimit().get() + Constants.MAX_ADDITIONAL_PATH_LENGTH) //
 				.withMaxNameLength(usedFilenameLengthLimit) //
+				.withNoShortNameEncryption(vaultSettings.noShortNameEncryption().get())
 				.build();
 		return CryptoFileSystemProvider.newFileSystem(getPath(), fsProps);
 	}

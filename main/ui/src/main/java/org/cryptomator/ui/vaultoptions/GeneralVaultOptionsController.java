@@ -26,6 +26,7 @@ public class GeneralVaultOptionsController implements FxController {
 
 	public TextField vaultName;
 	public CheckBox unlockOnStartupCheckbox;
+	public CheckBox noShortNameEncryptionCheckbox;
 	public ChoiceBox<WhenUnlocked> actionAfterUnlockChoiceBox;
 
 	@Inject
@@ -41,6 +42,7 @@ public class GeneralVaultOptionsController implements FxController {
 		vaultName.focusedProperty().addListener(this::trimVaultNameOnFocusLoss);
 		vaultName.setTextFormatter(new TextFormatter<>(this::removeWhitespaces));
 		unlockOnStartupCheckbox.selectedProperty().bindBidirectional(vault.getVaultSettings().unlockAfterStartup());
+		noShortNameEncryptionCheckbox.selectedProperty().bindBidirectional(vault.getVaultSettings().noShortNameEncryption());
 		actionAfterUnlockChoiceBox.getItems().addAll(WhenUnlocked.values());
 		actionAfterUnlockChoiceBox.valueProperty().bindBidirectional(vault.getVaultSettings().actionAfterUnlock());
 		actionAfterUnlockChoiceBox.setConverter(new WhenUnlockedConverter(resourceBundle));
